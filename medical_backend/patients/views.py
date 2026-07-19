@@ -5,9 +5,9 @@ from .models import Doctor, Patient
 from .serializers import DoctorSerializer, PatientSerializer
 
 class DoctorViewSet(viewsets.ModelViewSet):
-    doctor = Doctor.objects.all()
-    serializer = DoctorSerializer
+    queryset = Doctor.objects.all()
+    serializer_class = DoctorSerializer
 
 class PatientViewSet(viewsets.ModelViewSet):
-    patient = Patient.objects.all()
-    serializer = PatientSerializer
+    queryset = Patient.objects.all()
+    serializer_class = PatientSerializer
