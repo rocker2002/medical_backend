@@ -2,8 +2,8 @@ from django.shortcuts import render
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 from .permissions import IsDoctor
-from .models import Doctor, Patient
-from .serializers import DoctorSerializer, PatientSerializer
+from .models import Doctor, Patient, Appointment
+from .serializers import DoctorSerializer, PatientSerializer, AppointmentSerializer
 
 class DoctorViewSet(viewsets.ModelViewSet):
     queryset = Doctor.objects.all()
@@ -14,3 +14,8 @@ class PatientViewSet(viewsets.ModelViewSet):
     queryset = Patient.objects.all()
     serializer_class = PatientSerializer
     permission_classes = [IsDoctor]
+
+class AppointmentViewSet(viewsets.ModelViewSet):
+    queryset = Appointment.objects.all()
+    serializer_class = AppointmentSerializer
+    permission_classes = [IsAuthenticated]

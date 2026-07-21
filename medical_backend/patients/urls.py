@@ -1,5 +1,5 @@
 from rest_framework.routers import DefaultRouter
-from .views import DoctorViewSet, PatientViewSet
+from .views import DoctorViewSet, PatientViewSet, AppointmentViewSet
 from django.urls import path, include
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
@@ -10,6 +10,8 @@ router = DefaultRouter()
 
 router.register(r'doctors', DoctorViewSet, basename='doctor')
 router.register(r'patients', PatientViewSet, basename='patient')
+router.register(r'appointments', AppointmentViewSet, basename='appointment')
+
 
 urlpatterns =[
     path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
