@@ -41,3 +41,24 @@ class Profile(models.Model):
 
     def __str__(self):
         return f"{self.user}"
+    
+class Appointment(models.Model):
+    id = models.UUIDField(
+        primary_key=True,
+        default=uuid.uuid4,
+        editable=False
+    )
+    patient = models.ForeignKey(to=Patient, on_delete=models.PROTECT)
+    doctor = models.ForeignKey(to=Doctor, on_delete=models.PROTECT)
+    scheduled_time = models.DateTimeField()
+    class Status(models.TextChoices):
+        SCHEDULED = 'Scheduled'
+        COMPLETED = 'Completed'
+        CANCELLED = 'Cancelled'
+        POSTPONED = 'Postponed'
+
+    status = models.CharField(max_length=20, choices=Status.choices, default=Status.SCHEDULED)
+    notes = models.TextField(blank=True)
+
+    def __str__(self):
+        return f"{self.patient} - {self.doctor} - {self.status}"
