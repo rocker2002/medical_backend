@@ -28,3 +28,9 @@ class AppointmentSerializer(serializers.ModelSerializer):
         if query.exists():
             raise serializers.ValidationError("Doctor cannot have two appointment at the same time.")
         return data
+    
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        data['patient'] = {'id': instance.patient.id, 'name': instance.patient.name}
+        data['doctor'] = {'id': instance.doctor.id, 'name': instance.doctor.name}
+        return data
